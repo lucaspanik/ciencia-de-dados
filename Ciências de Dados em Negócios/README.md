@@ -1,4 +1,6 @@
-## Matéria: Ciências de Dados em Negócios
+# Matéria: Ciências de Dados em Negócios
+
+## Ciências de Dados
 
 ### Data: 27/04/2019
 
@@ -23,5 +25,13 @@ Devido ao BI (Business Intelligence) no ano 2000 ser focado em análise de dados
 ---
 
 Através dos dados crú, é extraído e estruturado as informações e colocado no Data Warehouse (Armazém de dados) e através das Data Smart são dados Dashboards a setores da empresa com exibição a necessidade específica de cada setor, em comparação com um banco de dados SQL, o Data Warehouse é seu banco de dados estruturado já com as informações, e o Data Smart são VIEWS do banco de dados direcionados a necessidades específicas de cada setor.
+
+---
+
+## Análise de Dados
+
+- Descritiva (Analisa o que já aconteceu)
+- Preditiva (Analisa quais serão as tendências)
+- Prescritiva (Prescreve a forma como realizar algo no futuro através de dados analisados)
 
 
