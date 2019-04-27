@@ -17,4 +17,9 @@
 5. Finalizar o modelo e apresentar os resultados
 
 ---
+
 Devido ao BI (Business Intelligence) no ano 2000 ser focado em análise de dados do passado para reconhecer falhas que já aconteceram, foi segregado o BI em um nova ramificação chamada de BA (Businees Analytics), onde o BA seria a análise de dados estruturados (ou não) para prever falhas futuras, ou ajudar a tomar decições. BI é análise de dados do passado para reconhecer falhas passados por exemplo, já o BA é análise de dados para reconhecimento de falhas futuras ou decições futuras por exemplo.
+
+---
+
+Através dos dados crú, é extraído e estruturado as informações e colocado no Data Warehouse (Armazém de dados) e através das Data Smart são dados Dashboards a setores da empresa com exibição a necessidade específica de cada setor, em comparação com um banco de dados SQL, o Data Warehouse é seu banco de dados estruturado já com as informações, e o Data Smart são VIEWS do banco de dados direcionados a necessidades específicas de cada setor.
