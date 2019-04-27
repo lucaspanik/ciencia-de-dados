@@ -31,7 +31,12 @@ Através dos dados crú, é extraído e estruturado as informações e colocado 
 ## Análise de Dados
 
 - Descritiva (Analisa o que já aconteceu)
-- Preditiva (Analisa quais serão as tendências)
+- Preditiva (Analisa quais serão as tendências, previsões futuras)
 - Prescritiva (Prescreve a forma como realizar algo no futuro através de dados analisados)
+- Cognitiva (É responsável por questões da análise dos dados em "tempo real" onde já teríamos um aprendizado maior após as análises anteriores)
+
+
+
+
 
 
