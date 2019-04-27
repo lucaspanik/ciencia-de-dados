@@ -35,6 +35,10 @@ Através dos dados crú, é extraído e estruturado as informações e colocado 
 - Prescritiva (Prescreve a forma como realizar algo no futuro através de dados analisados)
 - Cognitiva (É responsável por questões da análise dos dados em "tempo real" onde já teríamos um aprendizado maior após as análises anteriores)
 
+---
+
+> Estudar governança de dados
+> Mecanismo para gerenciar o uso dos recursos antílicos e a definição e responsabilidades para alinhar as iniciativas analíticas com os objetivos organizacionais.
 
 
 
