@@ -24,7 +24,7 @@ Devido ao BI (Business Intelligence) no ano 2000 ser focado em análise de dados
 
 ---
 
-Através dos dados crú, é extraído e estruturado as informações e colocado no Data Warehouse (Armazém de dados) e através das Data Smart são dados Dashboards a setores da empresa com exibição a necessidade específica de cada setor, em comparação com um banco de dados SQL, o Data Warehouse é seu banco de dados estruturado já com as informações, e o Data Smart são VIEWS do banco de dados direcionados a necessidades específicas de cada setor.
+Através dos dados cru, é extraído e estruturado as informações e colocado no Data Warehouse (Armazém de dados) e através das Data Smart são dados Dashboards a setores da empresa com exibição a necessidade específica de cada setor, em comparação com um banco de dados SQL, o Data Warehouse é seu banco de dados estruturado já com as informações, e o Data Smart são VIEWS do banco de dados direcionados a necessidades específicas de cada setor.
 
 ---
 
@@ -40,6 +40,14 @@ Através dos dados crú, é extraído e estruturado as informações e colocado 
 > Estudar governança de dados
 > Mecanismo para gerenciar o uso dos recursos antílicos e a definição e responsabilidades para alinhar as iniciativas analíticas com os objetivos organizacionais.
 
+---
+
+### Data: 11/05/2019
+
+#### Visões Empresariais Antigas
+- As empresas ligarem um cientista de dados como uma ferramenta (software)
+- Impressão da análise de dados ser sempre muito cara para a empresa
+- Clientes não estão demandando a necessidade da análise dos dados
 
 
 
