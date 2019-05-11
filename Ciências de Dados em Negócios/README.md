@@ -110,8 +110,27 @@ São dados já existentes na empresa, onde podem ser estruturados ou não, priva
 - Se o dado que você precisa não está disponível, pode haver uma boa oportunidade em coletá-lo
 - A escolha por dados internos ou externos deve estar alinhada á estratégia da organização
 
---
+---
 
 ## Cultura Orientada a Dados (Data Driven)
+> Estudar sobre o termo Data Driven
+
 ## Estratégias
+
+### Níveis Hierárquicos (da base para o topo)
+- Estratégico: Alta Administração (Topo da pirâmide)
+- Tático: Gerentes (Nível intermediário da pirâmide)
+- Operacional: Supervisores (Base da pirâmide)
+
+#### Estratégico:
+- Formulação dos objetivos
+- Seleção do curso das ações
+
+
+
+
+
+
+
+
 
