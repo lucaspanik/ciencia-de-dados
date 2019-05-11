@@ -77,10 +77,23 @@ São dados já existentes na empresa, onde podem ser estruturados ou não, priva
 - Geralmente barato ou de livre acesso
 - Em tese, os dados já se "encaixam" no negócio da organização
 
+#### Coletando os dados internos
+Considere se o dado que a organização precisa já está disponível ou se você tem a capacidade de gerá-lo ou coletá-lo de seus sistemas, produtos, clientes ou funcionários
+
 #### Dados Externos
 - Dados de mídias sociais
+- Dados do Google Trends
+- Dados Meteorológicos
+- Dados econômicos
+- Dados do censo, etc.
 
+##### Dados Externos - Desvantagens
+- Não são de propriedade da organização. Pode ser necessário pagar por eles.
+- Deve ponderar os riscos e custos da utilização de dados externos (trade-off)
 
+##### Dados Externos - Vantagens
+- Permite que as organizações tenham acesso a uma grande quantidade de dados que não poderiam ter sozinhas sem se preocupar com questão de armazenamento, segurança e gerenciamento
+- Gerralmente são mais ricos e complexos
 
 
 
