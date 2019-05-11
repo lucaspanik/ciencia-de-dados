@@ -78,7 +78,8 @@ São dados já existentes na empresa, onde podem ser estruturados ou não, priva
 - Em tese, os dados já se "encaixam" no negócio da organização
 
 #### Coletando os dados internos
-Considere se o dado que a organização precisa já está disponível ou se você tem a capacidade de gerá-lo ou coletá-lo de seus sistemas, produtos, clientes ou funcionários
+ - Considere se o dado que a organização precisa já está disponível ou se você tem a capacidade de gerá-lo ou coletá-lo de seus sistemas, produtos, clientes ou funcionários
+ - Vídeos podem ser coletados por meio de instalação de câmeras, pesquisas de opiniões podem ser conduzidas, sensores, etc.
 
 #### Dados Externos
 - Dados de mídias sociais
@@ -95,5 +96,12 @@ Considere se o dado que a organização precisa já está disponível ou se voc�
 - Permite que as organizações tenham acesso a uma grande quantidade de dados que não poderiam ter sozinhas sem se preocupar com questão de armazenamento, segurança e gerenciamento
 - Gerralmente são mais ricos e complexos
 
-
+ #### Acessando os dados externos
+ - Muitas organizações existem com o propósito de vender dados
+ - Fonte de sites confiáveis
+ 
+### Classificação dos dados:
+- Dados transacionais: São dados que transitam em uma comunicação internamente em um ação do sistema por exemplo.
+- Dados Analiticos: Informações obtidas e geradas a partir dos sistemas transacionais. Coleta o conjunto de transações para fins de decisões administrativas pontuais ou para política a longo prazo da empresa.
+- Sistema Híbridos: O grande valor extraído dos dados analíticos ocorre quando há integração estruturada dos dados transacionais com os conhecimentos gerados pela análise de dados.
 
