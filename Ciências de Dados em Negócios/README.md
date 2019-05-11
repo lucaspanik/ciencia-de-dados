@@ -49,25 +49,38 @@ Através dos dados cru, é extraído e estruturado as informações e colocado n
 - Impressão da análise de dados ser sempre muito cara para a empresa
 - Clientes não estão demandando a necessidade da análise dos dados
 
-#### Tipos de dados 
+### Tipos de dados 
 - Estruturados: Banco de dados, planilhas excel
 - Semi estruturados: E-mail, SMS
 - Não estruturados: Redes sociais, dados de imagens, vídeos e músicas
+
+---
+> Exemplo de desafios com os dados é exatamente como trabalhar com os dados desestruturados juntamente com dados estruturados, exemplo seria ligar dados de um twitter (não estruturado) de Fulano, com o mesmo Fulano que existe no banco de dados (estruturado)
+---
 
 #### Dados Internos
 São dados já existentes na empresa, onde podem ser estruturados ou não, privados ou não, controlados por uma empresa terceira (como um RH externo a empresa) ou não, tendo origens como:
 - Banco de Dados, 
 - Planilhas, 
 - Arquivos de texto
+- Pesquisas (de satisfação por exemplo) com empregados ou clientes, 
+- Chamadas telefônicas com os clientes
+- Vendas, financeiros, de estoque
+- Vídeos, máquinas ou sensorres (não estruturados)
+- Site da empresa ou de terceiros como ReclameAqui.com
+
+##### Dados Internos - Desvantagens
+- A empresa é responsável por manter e assegurar a integridade dos dados
+- Podem não ser suficientes para atender às necessidades organizacionais
+
+##### Dados Internos - Vantagens
+- Geralmente barato ou de livre acesso
+- Em tese, os dados já se "encaixam" no negócio da organização
 
 #### Dados Externos
-- Dados de pesquisas (de satisfação por exemplo) com empregados ou clientes, 
-- Dados de chamadas telefônicas com os clientes
-- Dados de vendas, financeiros, de estoque
-- Dados de vídeos, máquinas ou sensorres (não estruturados)
+- Dados de mídias sociais
 
----
-> Exemplo de desafios com os dados é exatamente como trabalhar com os dados desestruturados juntamente com dados estruturados, exemplo seria ligar dados de um twitter (não estruturado) de Fulano, com o mesmo Fulano que existe no banco de dados (estruturado)
----
+
+
 
 
