@@ -105,3 +105,13 @@ São dados já existentes na empresa, onde podem ser estruturados ou não, priva
 - Dados Analiticos: Informações obtidas e geradas a partir dos sistemas transacionais. Coleta o conjunto de transações para fins de decisões administrativas pontuais ou para política a longo prazo da empresa.
 - Sistema Híbridos: O grande valor extraído dos dados analíticos ocorre quando há integração estruturada dos dados transacionais com os conhecimentos gerados pela análise de dados.
 
+
+## Conclusão
+- Se o dado que você precisa não está disponível, pode haver uma boa oportunidade em coletá-lo
+- A escolha por dados internos ou externos deve estar alinhada á estratégia da organização
+
+--
+
+## Cultura Orientada a Dados (Data Driven)
+## Estratégias
+
