@@ -126,7 +126,11 @@ São dados já existentes na empresa, onde podem ser estruturados ou não, priva
 - Formulação dos objetivos
 - Seleção do curso das ações
 
+---
 
+## BI x Cientista de Dados
+
+## Definição do Problema
 
 
 
