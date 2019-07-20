@@ -9,7 +9,7 @@ import pandas as pd
 #    É importante estar atento às descrições na página para conhecer melhor do que tratam os dados.
 # 2) Utilizaremos somente o arquivo Thrift_Store_A.csv nesta análise.
 #    Mas, fiquem livres para explorar os outros.
-tsa = pd.read_csv("./Projects/UNISUAM/Python_P1910338/Thrift_Store_A.csv", delimiter=";")
+tsa = pd.read_csv("~/Projects/UNISUAM/Python_P1910338/Thrift_Store_A.csv", delimiter=";")
 
 # 3) Utilizando a linguagem de programação Python 3, analisem os dados para responder as seguintes perguntas:
 print("a) Quantas linhas possui o arquivo?")
@@ -89,9 +89,24 @@ print("Preco medio com desconto das camisas:")
 print(convertToBrazilianCurrency(shirtsWhithDiscountPrices.mean()))
 print("\n")
 
-# j) Qual o preço médio por produto?
-# l) Quais são as 10 marcas com preços médios maiores?
-# m) Quais foram os maiores descontos concedidos?
+print("j) Qual o preço médio por produto?")
+productMeans = tsaWhitoutPageNotFound.groupby(['nomeDaPeca', 'precoSemDesconto']).mean()
+print(productMeans)
+print("\n")
+
+print("l) Quais são as 10 marcas com preços médios maiores?")
+tsaWhitoutPageNotFound.groupby(['marca', 'precoSemDesconto']).mean().sort_values(by=['precoSemDesconto'], ascending=False).head(10)
+print("\n")
+
+
+print("m) Quais foram os maiores descontos concedidos?")
+tsaFloat = tsaWhitoutPageNotFound
+tsaFloat = tsaFloat.assign(precoSemDescontoFloat = tsaFloat['precoSemDesconto'].fillna(0.00).apply(lambda x: currencyStringToFloat(x)))
+tsaFloat = tsaFloat.assign(precoComDescontoFloat = tsaFloat['precoComDesconto'].fillna(0.00).apply(lambda x: currencyStringToFloat(x)))
+tsaFloat = tsaFloat.assign(descontoFloat         = tsaFloat['precoSemDescontoFloat'] - tsaFloat['precoComDescontoFloat'])
+print(tsaFloat.sort_values(by=['descontoFloat'], ascending=False).head(10))
+print("\n")
+
 #
 # 4) Ao concluir a atividade , envie as respostas e o código utilizado para
 #    roosevelt.pos@souunisuam.com.br até o início da próxima aula (13/07 8h).
