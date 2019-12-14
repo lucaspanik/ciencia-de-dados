@@ -1,0 +1,49 @@
+
+cd $MAHOUT_HOME
+
+a) Preparando o ambiente
+
+hdfs dfs -rmdir --ignore-fail-on-non-empty /user/
+
+export WORK_DIR=/tmp/mahout-work-hadoop
+
+mkdir -p /tmp/mahout-work-hadoop
+
+cp /home/hadoop/20news-bydate.tar.gz /tmp/mahout-work-hadoop
+
+mkdir -p /tmp/mahout-work-hadoop/20news-bydate
+
+cd /tmp/mahout-work-hadoop/20news-bydate && tar xzf ../20news-bydate.tar.gz && cd .. && cd ..
+
+mkdir /tmp/mahout-work-hadoop/20news-all
+
+cp -R /tmp/mahout-work-hadoop/20news-bydate/*/* /tmp/mahout-work-hadoop/20news-all   
+ 
+hdfs dfs -mkdir -p /tmp/mahout-work-hadoop/20news-all
+
+hdfs dfs -put /tmp/mahout-work-hadoop/20news-all /tmp/mahout-work-hadoop/20news-all
+
+
+b) Convert the full 20 newsgroups dataset into a < Text, Text > SequenceFile.
+
+mahout seqdirectory -i /tmp/mahout-work-hadoop/20news-all -o /tmp/mahout-work-hadoop/20news-seq -ow
+
+
+c) Convert and preprocesses the dataset into a < Text, VectorWritable > SequenceFile containing term frequencies for each document.
+
+mahout seq2sparse -i /tmp/mahout-work-hadoop/20news-seq -o /tmp/mahout-work-hadoop/20news-vectors -lnorm -nv -wt tfidf  
+
+
+d) Split the preprocessed dataset into training and testing sets.
+
+mahout split -i /tmp/mahout-work-hadoop/20news-vectors/tfidf-vectors --trainingOutput /tmp/mahout-work-hadoop/20news-train-vectors --testOutput /tmp/mahout-work-hadoop/20news-test-vectors  --randomSelectionPct 40 --overwrite --sequenceFiles -xm sequential
+
+
+e) Train the classifier.
+
+mahout trainnb -i /tmp/mahout-work-hadoop/20news-train-vectors -o /tmp/mahout-work-hadoop/model -li /tmp/mahout-work-hadoop/labelindex -ow -c
+
+
+f) Test the classifier
+
+mahout testnb -i /tmp/mahout-work-hadoop/20news-test-vectors -m /tmp/mahout-work-hadoop/model -l /tmp/mahout-work-hadoop/labelindex -ow -o /tmp/mahout-work-hadoop/20news-testing -c
