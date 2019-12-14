@@ -1,0 +1,118 @@
+cat /etc/passwd | grep "/sbin/nologin" | wc -l
+
+
+MHOUT
+
+a) Instalando o maven
+
+su - hadoop
+
+wget http://ftp.unicamp.br/pub/apache/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
+
+tar zxvf apache-maven-3.6.0-bin.tar.gz
+
+mv apache-maven-3.6.0 maven
+
+vim ~/.bashrc
+
+export PATH=/home/hadoop/maven/bin:${PATH}
+
+source ~/.bashrc
+
+mvn -version
+
+b) Instalando o MAHOUT
+
+wget -c http://ftp.unicamp.br/pub/apache/mahout/0.13.0/apache-mahout-distribution-0.13.0.tar.gz
+
+tar zxvf apache-mahout-distribution-0.13.0.tar.gz
+
+mv apache-mahout-distribution-0.13.0 /home/hadoop/mahout
+
+vim ~/.bashrc
+
+export MAHOUT_HOME=/home/hadoop/mahout
+export CLASSPATH=$MAHOUT_HOME/lib:$CLASSPATH
+export PATH=$PATH:$MAHOUT_HOME/bin
+export MAHOUT_LOCAL=true
+
+source ~/.bashrc
+
+cd $MAHOUT_HOME
+
+
+Testing
+
+a) Preparando o ambiente
+
+hdfs dfs -rmdir --ignore-fail-on-non-empty /user/
+
+export WORK_DIR=/tmp/mahout-work-${USER}
+
+mkdir -p ${WORK_DIR}
+
+curl http://people.csail.mit.edu/jrennie/20Newsgroups/20news-bydate.tar.gz -o ${WORK_DIR}/20news-bydate.tar.gz
+
+mkdir -p ${WORK_DIR}/20news-bydate
+
+cd ${WORK_DIR}/20news-bydate && tar xzf ../20news-bydate.tar.gz && cd .. && cd ..
+
+mkdir ${WORK_DIR}/20news-all
+
+cp -R ${WORK_DIR}/20news-bydate/*/* ${WORK_DIR}/20news-all   
+ 
+hdfs dfs -mkdir -p ${WORK_DIR}/20news-all
+
+hdfs dfs -put ${WORK_DIR}/20news-all ${WORK_DIR}/20news-all
+
+
+b) Convert the full 20 newsgroups dataset into a < Text, Text > SequenceFile.
+
+mahout seqdirectory -i ${WORK_DIR}/20news-all -o ${WORK_DIR}/20news-seq -ow
+
+
+c) Convert and preprocesses the dataset into a < Text, VectorWritable > SequenceFile containing term frequencies for each document.
+
+mahout seq2sparse -i ${WORK_DIR}/20news-seq -o ${WORK_DIR}/20news-vectors -lnorm -nv -wt tfidf  
+
+
+d) Split the preprocessed dataset into training and testing sets.
+
+mahout split -i ${WORK_DIR}/20news-vectors/tfidf-vectors --trainingOutput ${WORK_DIR}/20news-train-vectors --testOutput ${WORK_DIR}/20news-test-vectors  --randomSelectionPct 40 --overwrite --sequenceFiles -xm sequential
+
+
+e) Train the classifier.
+
+mahout trainnb -i ${WORK_DIR}/20news-train-vectors -o ${WORK_DIR}/model -li ${WORK_DIR}/labelindex -ow -c
+
+
+f) Test the classifier
+
+mahout testnb -i ${WORK_DIR}/20news-test-vectors -m ${WORK_DIR}/model -l ${WORK_DIR}/labelindex -ow -o ${WORK_DIR}/20news-testing -c
+
+
+Clustering of synthetic control data
+
+wget http://archive.ics.uci.edu/ml/databases/synthetic_control/synthetic_control.data
+
+hadoop fs -mkdir /canopy-testdata
+hadoop fs -mkdir /canopy-output
+
+hadoop fs -copyFromLocal /home/hadoop/synthetic_control.data /canopy-testdata/
+
+mahout org.apache.mahout.clustering.syntheticcontrol.canopy.Job -i hdfs://localhost:9000/canopy-testdata/ -o hdfs://localhost:9000/canopy-output -t1 80 -t2 55
+
+Dump the clusters
+
+$ mahout clusterdump -i hdfs://localhost:9000/canopy-output/clusters-*-final  -o /home/hadoop/clusteranalyze.txt
+
+
+
+
+
+https://mahout.apache.org/users/classification/twenty-newsgroups.html
+https://mahout.apache.org/users/classification/
+
+
+https://github.com/hixiaoxi/hixiaoxi.github.io/wiki/Installing-and-Testing-Mahout
+
