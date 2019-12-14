@@ -1,0 +1,221 @@
+Instalando o HADOOP
+
+
+1) Instalando JAVA
+
+yum install wget -y
+
+cd /opt
+
+wget -c http://enos.itcollege.ee/~jpoial/allalaadimised/jdk8/jdk-8u221-linux-x64.tar.gz
+
+
+tar -zxvf jdk-8u221-linux-x64.tar.gz
+
+mv jdk1.8.0_221/ java
+
+cd /opt/java/
+
+alternatives --install /usr/bin/java java /opt/java/bin/java 2
+alternatives --config java
+
+alternatives --install /usr/bin/jar jar /opt/java/bin/jar 2
+alternatives --install /usr/bin/javac javac /opt/java/bin/javac 2
+alternatives --set jar /opt/java/bin/jar
+alternatives --set javac /opt/java/bin/javac
+
+export JAVA_HOME=/opt/java
+export JRE_HOME=/opt/java/jre
+export PATH=$PATH:/opt/java/bin:/opt/java/jre/bin
+
+java -version
+
+
+2) Criando o usuário hadoop
+
+adduser hadoop
+
+passwd hadoop
+
+3) Hadoop SSH Password Less
+
+su - hadoop
+
+ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+chmod 0600 ~/.ssh/authorized_keys
+
+touch .hushlogin
+
+ssh hadoop
+
+exit
+
+
+4) Baixando o Haddop code
+
+su - hadoop
+
+cd ~
+
+wget -c https://archive.apache.org/dist/hadoop/core/hadoop-3.1.1/hadoop-3.1.1.tar.gz
+
+tar zxvf hadoop-3.1.1.tar.gz
+
+mv hadoop-3.1.1 hadoop
+
+export JAVA_HOME=/opt/java
+export PATH=$PATH:opt/java/bin
+
+5) Configurando o ambiente Hadoop Pseudo-Distributed Mode
+
+Configurar o bashrc
+
+vim ~/.bashrc
+
+export JAVA_HOME=/opt/java
+export PATH=$PATH:/opt/java/bin
+export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
+export HADOOP_HOME=/home/hadoop/hadoop
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+export HADOOP_OPTS="$HADOOP_OPTS -Djava.library.path=$HADOOP_HOME/lib/native"
+
+source ~/.bashrc
+
+echo $JAVA_HOME
+echo $HADOOP_HOME
+
+vim $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+
+export JAVA_HOME=/opt/java
+export HADOOP_CLASSPATH="${JAVA_HOME}/lib/tools.jar:$HADOOP_CLASSPATH"
+
+6) Setup Hadoop Configuration Files
+
+cd $HADOOP_HOME/etc/hadoop
+
+vim core-site.xml
+
+<configuration>
+<property>
+  <name>fs.default.name</name>
+    <value>hdfs://hadoop:9000</value>
+</property>
+</configuration>
+
+
+vim hdfs-site.xml
+
+
+<configuration>
+<property>
+ <name>dfs.replication</name>
+ <value>1</value>
+</property>
+
+<property>
+  <name>dfs.name.dir</name>
+    <value>file:///home/hadoop/hadoopdata/hdfs/namenode</value>
+</property>
+
+<property>
+  <name>dfs.data.dir</name>
+    <value>file:///home/hadoop/hadoopdata/hdfs/datanode</value>
+</property>
+</configuration>
+
+
+vim mapred-site.xml
+
+
+<configuration>
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+
+    <property>
+        <name>mapreduce.application.classpath</name>
+        <value>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value>
+    </property>
+</configuration>
+
+
+vim yarn-site.xml
+
+<configuration>
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.env-whitelist</name>
+        <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+    </property>
+</configuration>
+
+
+
+7) Formatando o  Namenode
+
+hdfs namenode -format
+
+
+8) Start Hadoop Cluster
+
+cd $HADOOP_HOME/sbin/
+./start-dfs.sh
+./start-yarn.sh
+
+jps
+
+hdfs dfsadmin -report | grep 'Configured Capacity' | tail -n1
+
+hdfs dfsadmin -report
+
+
+
+9) Acessando os servicos via browswer
+
+http://10.0.208.27:9870/
+
+http://10.0.208.27:8042/
+
+http://10.0.208.27:9864/
+
+http://10.0.208.27:8088/cluster
+
+
+
+10) Test Hadoop Single Node Setup
+
+hdfs dfs -mkdir /user
+hdfs dfs -mkdir /user/hadoop
+hdfs dfs -ls /user
+
+
+11) Rodando um wordcount
+
+hdfs dfs -mkdir -p /user/hadoop/input
+
+cd ..
+
+hdfs dfs -put LICENSE.txt /user/hadoop/input/
+
+cd $HADOOP_HOME
+
+yarn jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.1.1.jar wordcount input output
+
+hdfs dfs -cat /user/hadoop/output/part-r-00000
+
+hdfs dfs -rmdir /user/hadoop/output/part-r-00000
