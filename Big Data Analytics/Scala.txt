@@ -1,0 +1,15 @@
+tar zxvf scala-2.12.8.tgz
+
+mv scala-2.12.8 scala
+
+vim .bashrc
+
+# SCALA
+
+export SCALA_HOME=/home/hadoop/scala
+export PATH=$PATH:/home/hadoop/scala/bin
+export CLASSPATH=$SCALA_HOME/lib:$CLASSPATH
+
+source .bashrc
+
+scala -help
