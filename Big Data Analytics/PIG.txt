@@ -1,0 +1,58 @@
+14/12/2019
+
+
+#Iniciando o Hadoop Cluster
+
+su - hadoop
+
+cd $HADOOP_HOME/sbin/
+./start-dfs.sh
+./start-yarn.sh
+
+jps
+
+wget -c http://www-us.apache.org/dist/pig/pig-0.17.0/pig-0.17.0.tar.gz
+
+tar zxvf pig-0.17.0.tar.gz
+
+mv pig-0.17.0 pig
+
+vim .bashrc
+
+# Set PIG_HOME
+
+export PIG_HOME=/home/hadoop/pig
+export PATH=$PATH:/home/hadoop/pig/bin
+export PIG_CLASSPATH=$HADOOP_CONF_DIR
+
+source .bashrc
+
+
+pig -version
+
+pig -help
+
+
+Pig em modo Mapreduce
+
+hdfs dfs -ls /
+
+pig
+
+grunt> cd hdfs:///
+grunt> ls
+
+grunt> mkdir teste
+grunt> cd teste
+grunt> copyFromLocal /etc/passwd passwd
+grunt> ls
+
+
+grunt> passwd = LOAD 'passwd' USING PigStorage(':') AS (user:chararray, passwd:chararray, uid:int, gid:int, userinfo:chararray, home:chararray, shell:chararray);
+
+grunt> DUMP passwd;
+grunt> grp_shell = GROUP passwd BY shell;
+grunt> DUMP grp_shell;
+
+grunt> counts = FOREACH grp_shell GENERATE group, COUNT(passwd);
+grunt> DUMP counts;
