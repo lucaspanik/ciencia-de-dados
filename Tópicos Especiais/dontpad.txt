@@ -1,0 +1,73 @@
+http://dontpad.com/smalldata2020
+
+Groupby:
+
+rh.groupby(['Gender', 'MaritalStatus', 'Attrition']).median()
+
+Filtro:
+
+filtro_mulheres = rh['Gender'] == 'Female'
+filtro_mulheres.head()
+
+filtro_divorciados = rh['MaritalStatus'] == 'Divorced'
+filtro_divorciados.head()
+
+filtro_demissao = rh['Attrition']
+filtro_demissao.head()
+
+
+filtro_mulheres_divorciadas_demissao = filtro_mulheres & \
+                                       filtro_divorciados & \
+                                       filtro_demissao
+filtro_mulheres_divorciadas_demissao.sum()
+
+
+
+Links para baixar:
+
+https://www.dropbox.com/s/nyxk0nqaggnfnyx/%5BTop.%20Esp.%20em%20Ci%C3%AAncia%20de%20Dados%5D%20Small%20Data.ipynb?dl=0
+
+https://www.dropbox.com/s/3rx17d813k5ug1n/titanic-data-science-solutions.ipynb?dl=0
+
+https://www.dropbox.com/s/sogs7mc4u4bpl9x/comprehensive-data-exploration-with-python.ipynb?dl=0
+
+https://www.dropbox.com/s/sb98blybdhfntpc/WA_Fn-UseC_-HR-Employee-Attrition.csv?dl=0
+
+###################################
+Para quem não tem o pacote instalado:
+
+!pip install pymc3 
+
+###################### 
+
+import pandas as pd
+import numpy as np
+import pymc3 as pm
+import theano.tensor as tt
+import arviz as az
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy.special import expit
+from IPython.core.pylabtools import figsize
+
+
+#####################
+
+figsize(15, 6)
+ax1 = plt.subplot(1, 2, 1)
+ax2 = plt.subplot(1, 2, 2)
+sns.boxplot(data=rh[rh['Female']], x='MaritalStatus', y='Age', hue='Attrition', ax=ax1)
+sns.boxplot(data=rh[~rh['Female']], x='MaritalStatus', y='Age', hue='Attrition', ax=ax2)
+
+
+
+sns.distplot(rh['Age'])
+
+
+
+
+
+
+
+
+ 
